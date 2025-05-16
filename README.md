@@ -28,13 +28,15 @@ src/
 - **JSON Server** – Mock API untuk data menu, kategori, dll.
 - **Bootstrap / CSS** – Untuk styling antarmuka
 
+```
+
 ## 🔧 Instalasi dan Menjalankan Aplikasi
 
 1. **Clone repository**:
    ```bash
    git clone https://github.com/username/rull-food.git
    cd rull-food
-````
+   ```
 
 2. **Install dependencies**:
 
