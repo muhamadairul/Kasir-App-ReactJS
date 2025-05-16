@@ -13,8 +13,6 @@ Rull Food adalah aplikasi kasir sederhana berbasis web yang dikembangkan menggun
 
 ## 🧱 Struktur Direktori
 
-```
-
 src/
 ├── components/        # Komponen UI seperti menu, navbar, keranjang, dll.
 ├── pages/             # Halaman utama (Home, Sukses)
@@ -22,7 +20,6 @@ src/
 ├── App.js             # Root aplikasi
 ├── index.js           # Entry point React
 
-````
 
 ## 🌐 Teknologi yang Digunakan
 
