@@ -14,7 +14,7 @@ export default class Hasil extends Component {
     this.state = {
       showModal: false,
       keranjangDetail: false,
-      jumlah: 0,
+      quantity: 0,
       keterangan: "",
       totalHarga: 0,
     };
@@ -24,9 +24,9 @@ export default class Hasil extends Component {
     this.setState({
       showModal: true,
       keranjangDetail: menuKeranjang,
-      jumlah: menuKeranjang.jumlah,
+      quantity: menuKeranjang.quantity,
       keterangan: menuKeranjang.keterangan,
-      totalHarga: menuKeranjang.total_harga,
+      totalHarga: menuKeranjang.total_amount,
     });
   };
 
@@ -38,18 +38,18 @@ export default class Hasil extends Component {
 
   tambah = () => {
     this.setState({
-      jumlah: this.state.jumlah + 1,
+      quantity: this.state.quantity + 1,
       totalHarga:
-        this.state.keranjangDetail.product.harga * (this.state.jumlah + 1),
+        this.state.keranjangDetail.product.price * (this.state.quantity + 1),
     });
   };
 
   kurang = () => {
-    if (this.state.jumlah !== 1) {
+    if (this.state.quantity !== 1) {
       this.setState({
-        jumlah: this.state.jumlah - 1,
+        quantity: this.state.quantity - 1,
         totalHarga:
-          this.state.keranjangDetail.product.harga * (this.state.jumlah - 1),
+          this.state.keranjangDetail.product.price * (this.state.quantity - 1),
       });
     }
   };
@@ -66,18 +66,18 @@ export default class Hasil extends Component {
     this.handleClose();
 
     const data = {
-      jumlah: this.state.jumlah,
-      total_harga: this.state.totalHarga,
+      quantity: this.state.quantity,
+      total_amount: this.state.total_amount,
       product: this.state.keranjangDetail.product,
       keterangan: this.state.keterangan,
     };
 
     axios
-      .put(API_URL + "keranjangs/" + this.state.keranjangDetail.id, data)
+      .put(API_URL + "carts/" + this.state.keranjangDetail.id, data)
       .then((res) => {
         swal({
           title: "Update Pesanan!",
-          text: "Sukses Update Pesanan " + data.product.nama,
+          text: "Sukses Update Pesanan " + data.product.name,
           icon: "success",
           button: false,
           timer: 1500,
@@ -92,12 +92,12 @@ export default class Hasil extends Component {
     this.handleClose();
 
     axios
-      .delete(API_URL + "keranjangs/" + id)
+      .delete(API_URL + "carts/" + id)
       .then((res) => {
         swal({
           title: "Hapus Pesanan!",
           text:
-            "Sukses Hapus Pesanan " + this.state.keranjangDetail.product.nama,
+            "Sukses Hapus Pesanan " + this.state.keranjangDetail.product.name,
           icon: "error",
           button: false,
           timer: 1500,
@@ -128,17 +128,17 @@ export default class Hasil extends Component {
                     <Col xs={2}>
                       <h4>
                         <Badge pill variant="success">
-                          {menuKeranjang.jumlah}
+                          {menuKeranjang.quantity}
                         </Badge>
                       </h4>
                     </Col>
                     <Col>
-                      <h5>{menuKeranjang.product.nama}</h5>
-                      <p>Rp. {numberWithCommas(menuKeranjang.product.harga)}</p>
+                      <h5>{menuKeranjang.product_name}</h5>
+                      <p>Rp. {numberWithCommas(menuKeranjang.product_price)}</p>
                     </Col>
                     <Col>
                       <strong className="float-right">
-                        Rp. {numberWithCommas(menuKeranjang.total_harga)}
+                        Rp. {numberWithCommas(menuKeranjang.total_amount)}
                       </strong>
                     </Col>
                   </Row>
