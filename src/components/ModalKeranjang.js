@@ -22,7 +22,7 @@ const ModalKeranjang = ({
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {keranjangDetail.product.nama}{" "}
+            {keranjangDetail.product.name}{" "}
             <strong>
               (Rp. {numberWithCommas(keranjangDetail.product.harga)})
             </strong>

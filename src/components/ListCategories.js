@@ -3,19 +3,13 @@ import { Col, ListGroup } from "react-bootstrap";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUtensils,
-  faCoffee,
-  faCheese,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUtensils, faCoffee, faCheese } from "@fortawesome/free-solid-svg-icons";
 
 const Icon = ({ nama }) => {
-  if (nama === "Makanan")
-    return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
+  if (nama === "Makanan") return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
   if (nama === "Minuman") return <FontAwesomeIcon icon={faCoffee} />;
-  if (nama === "Cemilan")
-    return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
-
+  if (nama === "Snack") return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
+  // if (nama === "Dessert") return <FontAwesomeIcon icon={fa} className="mr-2" />;
   return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
 };
 
@@ -30,7 +24,7 @@ export default class ListCategories extends Component {
 
   componentDidMount() {
     axios
-      .get(API_URL + "categories")
+      .get(API_URL + "/product-categories")
       .then((res) => {
         const categories = res.data;
         this.setState({ categories });
@@ -54,12 +48,12 @@ export default class ListCategories extends Component {
             categories.map((category) => (
               <ListGroup.Item
                 key={category.id}
-                onClick={() => changeCategory(category.nama)}
-                className={categoriYangDipilih === category.nama && "category-aktif"}
-                style={{cursor: 'pointer'}}
+                onClick={() => changeCategory(category.name)}
+                className={categoriYangDipilih === category.name && "category-aktif"}
+                style={{ cursor: "pointer" }}
               >
                 <h5>
-                  <Icon nama={category.nama} /> {category.nama}
+                  <Icon nama={category.name} /> {category.name}
                 </h5>
               </ListGroup.Item>
             ))}

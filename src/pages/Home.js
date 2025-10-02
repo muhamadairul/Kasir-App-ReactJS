@@ -18,7 +18,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     axios
-      .get(API_URL + "products?category.nama=" + this.state.categoriYangDipilih)
+      .get(API_URL + "/products?category=" + this.state.categoriYangDipilih)
       .then((res) => {
         const menus = res.data;
         this.setState({ menus });
@@ -28,7 +28,7 @@ export default class Home extends Component {
       });
 
     axios
-      .get(API_URL + "keranjangs")
+      .get(API_URL + "/carts")
       .then((res) => {
         const keranjangs = res.data;
         this.setState({ keranjangs });
@@ -38,19 +38,19 @@ export default class Home extends Component {
       });
   }
 
-  componentDidUpdate(prevState) {
-    if(this.state.keranjangs !== prevState.keranjangs) {
-      axios
-      .get(API_URL + "keranjangs")
-      .then((res) => {
-        const keranjangs = res.data;
-        this.setState({ keranjangs });
-      })
-      .catch((error) => {
-        console.log("Error yaa ", error);
-      });
-    }
-  }
+  // componentDidUpdate(prevState) {
+  //   if(this.state.keranjangs !== prevState.keranjangs) {
+  //     axios
+  //     .get(API_URL + "/carts")
+  //     .then((res) => {
+  //       const keranjangs = res.data;
+  //       this.setState({ keranjangs });
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error yaa ", error);
+  //     });
+  //   }
+  // }
 
   changeCategory = (value) => {
     this.setState({
@@ -59,7 +59,7 @@ export default class Home extends Component {
     });
 
     axios
-      .get(API_URL + "products?category.nama=" + value)
+      .get(API_URL + "/products?category=" + value)
       .then((res) => {
         const menus = res.data;
         this.setState({ menus });
@@ -71,7 +71,7 @@ export default class Home extends Component {
 
   masukKeranjang = (value) => {
     axios
-      .get(API_URL + "keranjangs?product.id=" + value.id)
+      .get(API_URL + "/carts?product.id=" + value.id)
       .then((res) => {
         if (res.data.length === 0) {
           const keranjang = {
@@ -81,7 +81,7 @@ export default class Home extends Component {
           };
 
           axios
-            .post(API_URL + "keranjangs", keranjang)
+            .post(API_URL + "/carts", keranjang)
             .then((res) => {
               swal({
                 title: "Sukses Masuk Keranjang",
@@ -102,7 +102,7 @@ export default class Home extends Component {
           };
 
           axios
-            .put(API_URL + "keranjangs/" + res.data[0].id, keranjang)
+            .put(API_URL + "/carts/" + res.data[0].id, keranjang)
             .then((res) => {
               swal({
                 title: "Sukses Masuk Keranjang",

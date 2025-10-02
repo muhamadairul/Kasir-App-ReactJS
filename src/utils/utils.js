@@ -1,3 +1,3 @@
-export const numberWithCommas = (x) => {
+export const numberWithCommas = (x = 0) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

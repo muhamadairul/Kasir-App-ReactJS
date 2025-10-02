@@ -14,7 +14,7 @@ export default class TotalBayar extends Component {
     };
 
     axios
-      .post(API_URL + "pesanans", pesanan)
+      .post(API_URL + "/orders", pesanan)
       .then((res) => {
          window.location = "/sukses";
       })
